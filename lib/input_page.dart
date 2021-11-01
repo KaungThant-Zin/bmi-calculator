@@ -34,38 +34,34 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      bmicolour: selectedGender == Gender.male
-                          ? inactiveCardColor
-                          : activeCardColor,
-                      childCard: IconContent(
-                        myIcon: FontAwesomeIcons.mars,
-                        myText: 'MALE',
-                      ),
+                    bmicolour: selectedGender == Gender.male
+                        ? inactiveCardColor
+                        : activeCardColor,
+                    childCard: IconContent(
+                      myIcon: FontAwesomeIcons.mars,
+                      myText: 'MALE',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      bmicolour: selectedGender == Gender.female
-                          ? inactiveCardColor
-                          : activeCardColor,
-                      childCard: IconContent(
-                        myIcon: FontAwesomeIcons.venus,
-                        myText: 'FEMALE',
-                      ),
+                    bmicolour: selectedGender == Gender.female
+                        ? inactiveCardColor
+                        : activeCardColor,
+                    childCard: IconContent(
+                      myIcon: FontAwesomeIcons.venus,
+                      myText: 'FEMALE',
                     ),
                   ),
                 ),
