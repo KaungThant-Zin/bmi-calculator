@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
-
-const bottomContainerHeight = 70.0;
-const bottomContainerColor = Color(0xFFBE1555);
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
+import 'constants.dart';
 
 enum Gender {
   male,
@@ -19,6 +15,7 @@ class InputPage extends StatefulWidget {
 }
 
 Gender selectedGender;
+int slideheight = 180;
 
 class _InputPageState extends State<InputPage> {
   @override
@@ -29,6 +26,7 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -71,6 +69,54 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               bmicolour: activeCardColor,
+              childCard: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "HEIGHT",
+                    style: myTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        slideheight.toString(),
+                        style: myNumStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: myTextStyle,
+                      ),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: myTextStyle.color,
+                      thumbShape: RoundSliderThumbShape(
+                        enabledThumbRadius: 13.0,
+                      ),
+                      thumbColor: bottomContainerColor,
+                      overlayColor: Color(0x29BE1555),
+                      overlayShape: RoundSliderOverlayShape(
+                        overlayRadius: 30.0,
+                      ),
+                    ),
+                    child: Slider(
+                      value: slideheight.toDouble(),
+                      min: 120.0,
+                      max: 220.0,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          slideheight = newValue.round();
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
