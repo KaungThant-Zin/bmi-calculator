@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
+import 'result.dart';
+import 'bottom_calculate.dart';
 
 enum Gender {
   male,
@@ -16,6 +18,8 @@ class InputPage extends StatefulWidget {
 
 Gender selectedGender;
 int slideheight = 180;
+int weight = 60;
+int age = 19;
 
 class _InputPageState extends State<InputPage> {
   @override
@@ -125,23 +129,122 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     bmicolour: activeCardColor,
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: myTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: myNumStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyFloatButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            MyFloatButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     bmicolour: activeCardColor,
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: myTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: myNumStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyFloatButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            MyFloatButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10.0),
-            color: Color(0xFFBE1555),
-            height: bottomContainerHeight,
-            width: double.infinity,
+          BottomCalculate(
+            title: 'CALCULATE',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(),
+                ),
+              );
+            },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MyFloatButton extends StatelessWidget {
+  MyFloatButton({@required this.icon, @required this.onPress});
+  final IconData icon;
+  final Function onPress;
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: onPress,
+      child: Icon(icon),
+      elevation: 0.0,
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      constraints: BoxConstraints.tightFor(
+        height: 56.0,
+        width: 56.0,
       ),
     );
   }
