@@ -1,6 +1,7 @@
 # bmi_calculator
 
 A new Flutter project.
+[Demo](http://bmiktz.surge.sh/)
 
 ## Getting Started
 
